@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using MZ_DosTablas.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<MZ_DosTablasContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MZ_DosTablasContext") ?? throw new InvalidOperationException("Connection string 'MZ_DosTablasContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
